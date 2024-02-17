@@ -1,1 +1,4 @@
+# File format:
+# <Host_IP> - <Host_name>
+
 192.168.203.128 - astra_128
