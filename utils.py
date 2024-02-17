@@ -53,7 +53,7 @@ def initialize_hosts(hostnames_list, hosts_list):
 
 def read_ip_to_list(filename):
     """
-    Считывает IP-адреса и имена хостов из файла в два списка.
+    Считывает IP-адреса и имена хостов из файла в два списка, игнорируя пустые строки и строки, начинающиеся с '#'.
 
     Функция открывает указанный файл и разделяет каждую строку по символу " - ", предполагая, что каждая строка файла
     содержит IP-адрес, за которым следует имя хоста. Каждый IP-адрес и имя хоста добавляются в отдельные списки.
@@ -79,9 +79,10 @@ def read_ip_to_list(filename):
 
         with open(filename) as file:
             for line in file:
-                ip, hostname = line.strip().split(" - ")
-                ips_list.append(ip)
-                hostnames_list.append(hostname)
+                if line[0] != '#' or '':
+                    ip, hostname = line.strip().split(" - ")
+                    ips_list.append(ip)
+                    hostnames_list.append(hostname)
 
         return ips_list, hostnames_list
     else:
